@@ -26,9 +26,10 @@
           2) A ACEITAÇÃO DESTES TERMOS E CONDIÇÕES GERAIS É INDISPENSÁVEL À
           UTILIZAÇÃO DOS SITES E SERVIÇOS PRESTADOS PELO APLICATIVO. O USUÁRIO
           deverá ler, certificar-se de haver entendido e aceitar todas as
-          disposições estabelecidas nos Termos e Condições e na Política de
-          Privacidade, para que então seja efetuado com sucesso seu cadastro
-          como USUÁRIO do APLICATIVO.
+          disposições estabelecidas nos Termos e Condições e na
+          <a href="/privacy-policies">Política de Privacidade </a>, para que
+          então seja efetuado com sucesso seu cadastro como USUÁRIO do
+          APLICATIVO.
         </p>
         <h2>Do Usuário:</h2>
         <P>
@@ -141,6 +142,7 @@
           17) Os casos omissos neste instrumento serão resolvidos de
           conformidade com as disposições legais aplicáveis à espécie.
         </p>
+        <v-btn block color="primary" to="/login">VOLTAR</v-btn>
       </v-col>
     </v-row>
   </v-container>
