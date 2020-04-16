@@ -1,6 +1,6 @@
-# Pulmonar Web App
+# Pulmonapp Web App
 
-## Web application for Pulmonar Team
+## Web application developed to work with the mechanical ventilator of the Pulmonar Team
 
 ### About Pulmonar Team
 

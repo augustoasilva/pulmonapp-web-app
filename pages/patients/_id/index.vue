@@ -138,36 +138,54 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="4" sm="4" md="4">
-            <v-btn
-              :disabled="!valid"
-              color="info"
-              block
-              class="mr-4"
-              @click="calculateTidalVolume"
-            >
-              Calcular
-            </v-btn>
-          </v-col>
-          <v-col cols="4" sm="4" md="4">
+          <v-col cols="12" sm="12" md="6">
             <v-btn
               :disabled="!valid"
               color="success"
               block
               class="mr-4"
-              @click="registerPatient"
+              @click="updatePatient"
             >
-              Cadastrar
+              Atualizar
             </v-btn>
           </v-col>
-          <v-col cols="4" sm="4" md="4">
-            <v-btn color="error" block class="mr-4" @click="reset">
-              Limpar
+          <v-col cols="12" sm="12" md="6">
+            <v-btn color="error" block class="mr-4" to="/patients">
+              Voltar
             </v-btn>
           </v-col>
         </v-row>
       </v-form>
     </v-col>
+    <v-speed-dial direction="bottom" transition="slide-y-transition" top right>
+      <template v-slot:activator>
+        <v-btn fab color="accent">
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
+      </template>
+      <v-btn :to="familyAdd" fab dark small color="secondary">
+        <v-icon>mdi-account-multiple-plus</v-icon>
+      </v-btn>
+      <v-btn :to="familyList" fab dark small color="primary">
+        <v-icon>mdi-account-multiple</v-icon>
+      </v-btn>
+      <v-btn :to="historicList" fab dark small color="info">
+        <v-icon>mdi-clipboard-account</v-icon>
+      </v-btn>
+      <v-btn
+        v-if="!isDischarged"
+        fab
+        dark
+        small
+        color="success"
+        @click="dischargePatient"
+      >
+        <v-icon>mdi-account-arrow-right</v-icon>
+      </v-btn>
+      <v-btn to="/patients" fab dark small color="green">
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
+    </v-speed-dial>
   </v-row>
 </template>
 
@@ -177,51 +195,62 @@
 
 export default {
   layout: 'client',
-  components: {},
   middleware: ['auth'],
+  async asyncData({ $axios, params }) {
+    const { patient } = await $axios.$get('/patients/' + params.id)
+    const familyURI = `/patients/${params.id}/family`
+    const familyAddURI = `/patients/${params.id}/family/add`
+    const historicURI = `/patients/${params.id}/historics`
+    return {
+      firstName: patient.firstName,
+      middleName: patient.middleName,
+      lastName: patient.lastName,
+      rg: patient.rg,
+      cpf: patient.cpf,
+      hospital: patient.hospital,
+      city: patient.location.city,
+      state: patient.location.state,
+      weight: patient.weight,
+      height: patient.height,
+      tidalVolumeInputPerMass: patient.tidalVolumePerMass.toString(),
+      sex: patient.sex,
+      isDischarged: patient.isDischarged,
+      tidalVolume: patient.tidalVolume,
+      familyList: familyURI,
+      familyAdd: familyAddURI,
+      historicList: historicURI
+    }
+  },
   data() {
     return {
       valid: true,
-      firstName: '',
       firstNameRules: [],
-      middleName: '',
       middleNameRules: [],
-      lastName: '',
       lastNameRules: [],
-      rg: '',
       rgRules: [],
-      cpf: '',
       cpfRules: [],
-      hospital: '',
       hospitalRules: [],
-      city: '',
       cityRules: [],
-      state: '',
       stateRules: [],
-      weight: '',
       weightRules: [
         (v) => !!v || 'O peso do(a) paciente é necessário!',
         (v) =>
           /^\d{2}\.?\d{0,2}$/.test(v) ||
           'O peso precisa ser válida. Ex.: 70 ou 90.00'
       ],
-      height: '',
       heightRules: [
         (v) => !!v || 'Altura do(a) paciente é necessária!',
         (v) =>
           /^\d{3}\.?\d{0,2}$/.test(v) ||
           'Altura precisa ser válida. Ex.: 150 ou 180.00'
       ],
-      tidalVolumeInputPerMass: null,
       tidalVolumeInputPerMassItens: ['4', '5', '6', '7', '8'],
-      sex: null,
       sexItens: ['Masculino', 'Feminino'],
-      tidalVolume: null,
       tidalVolumeRules: []
     }
   },
   methods: {
-    calculateTidalVolume() {
+    async updatePatient() {
       const height = parseFloat(this.height)
       const tidalVolumePerMass = parseFloat(this.tidalVolumeInputPerMass)
       let sexVar
@@ -236,33 +265,16 @@ export default {
       const ibw = sexVar + 0.91 * (height - 152.4)
       const tidalVolume = tidalVolumePerMass * ibw
       this.tidalVolume = Math.round(tidalVolume)
-    },
-    async registerPatient() {
-      if (!this.tidalVolume) {
-        const height = parseFloat(this.height)
-        const tidalVolumePerMass = parseFloat(this.tidalVolumeInputPerMass)
-        let sexVar
-        switch (this.sex) {
-          case 'Masculino':
-            sexVar = 50
-            break
-          case 'Feminino':
-            sexVar = 45.5
-            break
-        }
-        const ibw = sexVar + 0.91 * (height - 152.4)
-        const tidalVolume = tidalVolumePerMass * ibw
-        this.tidalVolume = Math.round(tidalVolume)
-      }
+
       const data = {
         firstName: this.firstName,
         middleName: this.middleName,
         lastName: this.lastName,
         rg: this.rg,
         cpf: this.cpf,
-        weight: this.weight,
-        height: this.height,
-        tidalVolumePerMass: this.tidalVolumeInputPerMass,
+        weight: this.weight.toString(),
+        height: this.height.toString(),
+        tidalVolumePerMass: this.tidalVolumeInputPerMass.toString(),
         sex: this.sex,
         tidalVolume: this.tidalVolume,
         location: {
@@ -273,26 +285,44 @@ export default {
         assignedBy: this.$auth.user.id
       }
       try {
-        const response = await this.$axios.post('/patients', data)
+        const response = await this.$axios.put(
+          `/patients/${this.$route.params.id}`,
+          data
+        )
         if (response.status === 200) {
-          this.$refs.form.reset()
-          this.tidalVolume = null
+          // eslint-disable-next-line no-console
+          console.log('Paciente atualizado!')
         }
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error(error)
       }
     },
-    reset() {
-      this.$refs.form.reset()
-      this.tidalVolume = 0
+    async dischargePatient() {
+      const data = { assignedBy: this.$auth.user.id }
+      try {
+        const response = await this.$axios.put(
+          `/patients/${this.$route.params.id}/discharge`,
+          data
+        )
+        if (response.status === 200) {
+          // eslint-disable-next-line no-console
+          console.log('Paciente atualizado!')
+          this.$router.push(`/patients/${this.$route.params.id}/historics`)
+        }
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error)
+      }
     }
   }
 }
 </script>
 <style scoped>
 #patient .v-speed-dial {
-  position: absolute;
+  position: fixed;
+  top: 2em;
+  z-index: 999;
 }
 
 #patient .v-btn--floating {

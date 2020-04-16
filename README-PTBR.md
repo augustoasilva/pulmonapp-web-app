@@ -1,6 +1,6 @@
-# Pulmonar Web App
+# Pulmonapp - Web App
 
-## Aplicação web para a Equipe Pulmonar
+## Aplicação web desenvolvida para atuar junto ao ventilador mecânico da Equipe Pulmonar
 
 ### Sobre a Equipe Pulmonar
 
@@ -40,6 +40,6 @@ Você pode contribuir de diversas maneiras:
 * Corrigindo bugs que não foram corrigidos
 * Divulgando o projeto para que mais contribuintes apareçam
 
-Para explicação detalhada de como usar o [Nuxt.js](https://nuxtjs.org) funciona, dê uma olhada nas [docs do Nuxt.js](https://nuxtjs.org/guide).
+Para explicação detalhada de como usar o [Nuxt.js](https://nuxtjs.org) e como ele funciona, dê uma olhada nas [docs do Nuxt.js](https://nuxtjs.org/guide).
 
 >English version of [README](README.md)
