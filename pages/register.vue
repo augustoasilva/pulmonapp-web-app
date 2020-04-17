@@ -24,6 +24,9 @@
                   name="firstName"
                   prepend-inner-icon="mdi-account"
                   type="text"
+                  hint="Digite todos os nomes do meio."
+                  persistent-hint
+                  required
                 />
                 <v-text-field
                   v-model="middleName"
@@ -31,6 +34,9 @@
                   name="lastName"
                   prepend-inner-icon="mdi-account"
                   type="text"
+                  hint="Digite apenas o primeiro nome."
+                  persistent-hint
+                  required
                 />
                 <v-text-field
                   v-model="lastName"
@@ -38,6 +44,9 @@
                   name="lastName"
                   prepend-inner-icon="mdi-account"
                   type="text"
+                  hint="Digite apenas o último nome."
+                  persistent-hint
+                  required
                 />
                 <v-text-field
                   v-model="rg"
@@ -45,6 +54,9 @@
                   name="rg"
                   prepend-inner-icon="mdi-card-account-details"
                   type="text"
+                  hint="Digite os números, orgão expedidor e estado. Ex.: 123456/SSPPI."
+                  persistent-hint
+                  required
                 />
                 <v-text-field
                   v-model="cpf"
@@ -52,6 +64,9 @@
                   name="cpf"
                   prepend-inner-icon="mdi-card-account-details"
                   type="text"
+                  hint="Digite apenas número."
+                  persistent-hint
+                  required
                 />
                 <v-text-field
                   v-model="email"
@@ -59,6 +74,7 @@
                   name="email"
                   prepend-inner-icon="mdi-email"
                   type="text"
+                  required
                 />
                 <v-select
                   v-model="profession"
@@ -74,6 +90,9 @@
                   name="registrationNumber"
                   prepend-inner-icon="mdi-card-account-details"
                   type="text"
+                  hint="Digite apenas número."
+                  persistent-hint
+                  required
                 />
                 <v-text-field
                   v-model="city"
@@ -81,6 +100,7 @@
                   name="city"
                   prepend-inner-icon="mdi-map-marker"
                   type="text"
+                  required
                 />
                 <v-select
                   v-model="state"
@@ -96,6 +116,9 @@
                   name="hospital"
                   prepend-inner-icon="mdi-hospital-building"
                   type="text"
+                  hint="Digite o nome do hospital com as primeiras letras maiúsculas. Ex.: São Marcos"
+                  persistent-hint
+                  required
                 />
                 <v-text-field
                   id="password"
@@ -104,6 +127,7 @@
                   name="password"
                   prepend-inner-icon="mdi-lock"
                   type="password"
+                  required
                 />
                 <v-text-field
                   id="confirmPassword"
@@ -112,6 +136,7 @@
                   name="confirmPassword"
                   prepend-inner-icon="mdi-lock-check"
                   type="password"
+                  required
                 />
                 <v-checkbox v-model="accepetedTerms">
                   <template v-slot:label>
@@ -183,8 +208,7 @@ export default {
         'Médico(a)',
         'Fisioterapeuta(a)',
         'Enfermeiro(a)',
-        'Psicólogo(a)',
-        'Engenheiro(a)'
+        'Farmacêutico(a)'
       ],
       registrationNumber: '',
       city: '',
@@ -221,7 +245,7 @@ export default {
       hospital: '',
       password: '',
       confirmPassword: '',
-      accepetedTerms: '',
+      accepetedTerms: null,
       snackBartext: '',
       snackbar: false,
       snackbarTimeout: 2000,
@@ -231,6 +255,11 @@ export default {
   },
   methods: {
     async register() {
+      if (!this.accepetedTerms) {
+        return alert(
+          'Você precisa aceitar os Termos e Condições e as Políticas de Privacidade!'
+        )
+      }
       const data = {
         firstName: this.firstName,
         middleName: this.middleName,
@@ -264,7 +293,8 @@ export default {
         } catch (error) {
           // this.$toast.error('Um erro insperado ocorreu, tente novamente.')
           this.snackbar = true
-          this.snackBartext = 'Um erro insperado ocorreu, tente novamente.'
+          return (this.snackBartext =
+            'Um erro insperado ocorreu, tente novamente.')
         }
       }
     }

@@ -41,7 +41,7 @@
               v-model="rg"
               :rules="rgRules"
               label="RG"
-              hint="Digite os números, orgão expedidor e estado. Ex.: 123456SSPPI."
+              hint="Digite os números, orgão expedidor e estado. Ex.: 123456/SSPPI."
               persistent-hint
               required
             >
@@ -79,12 +79,14 @@
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="12" md="4">
-            <v-text-field
+            <v-select
               v-model="state"
+              :items="stateItems"
               :rules="stateRules"
               label="Estado"
+              prepend-icon="mdi-map-marker"
               required
-            ></v-text-field>
+            ></v-select>
           </v-col>
         </v-row>
         <v-row>
@@ -224,14 +226,45 @@ export default {
   data() {
     return {
       valid: true,
-      firstNameRules: [],
-      middleNameRules: [],
-      lastNameRules: [],
-      rgRules: [],
-      cpfRules: [],
-      hospitalRules: [],
-      cityRules: [],
-      stateRules: [],
+      firstNameRules: [(v) => !!v || 'O nome do(a) paciente é necessário!'],
+      middleNameRules: [
+        (v) => !!v || 'Os nome(s) do(a) paciente é necessário!'
+      ],
+      lastNameRules: [(v) => !!v || 'O sobrenome do(a) paciente é necessário!'],
+      rgRules: [(v) => !!v || 'O RG do(a) paciente é necessário!'],
+      cpfRules: [(v) => !!v || 'O CPF do(a) paciente é necessário!'],
+      hospitalRules: [(v) => !!v || 'O hospital do(a) paciente é necessário!'],
+      cityRules: [(v) => !!v || 'A cidade do(a) paciente é necessário!'],
+      stateRules: [(v) => !!v || 'O estado do(a) paciente é necessário!'],
+      stateItems: [
+        'AC',
+        'AL',
+        'AP',
+        'AM',
+        'BA',
+        'CE',
+        'DF',
+        'ES',
+        'GO',
+        'MA',
+        'MT',
+        'MS',
+        'MG',
+        'PA',
+        'PB',
+        'PR',
+        'PE',
+        'PI',
+        'RJ',
+        'RN',
+        'RS',
+        'RO',
+        'RR',
+        'SC',
+        'SP',
+        'SE',
+        'TO'
+      ],
       weightRules: [
         (v) => !!v || 'O peso do(a) paciente é necessário!',
         (v) =>
