@@ -33,7 +33,7 @@ mongoose.connect(
 )
 
 // Cors config options
-const whitelist = ['localhost']
+const whitelist = ['localhost', 'www.pulmonapp.com']
 const corsOptions = {
   origin(origin, callback) {
     if (whitelist.includes(origin)) {
@@ -79,8 +79,13 @@ async function start() {
   app.use(helmet())
   app.use(cors(corsOptions))
 
+  consola.info({
+    message: `Host: ${host}`,
+    badge: true
+  })
+  // Removido host daqui por conta da hospedagem da umbler
   // Listen the server
-  app.listen(port, host)
+  app.listen(port)
   consola.ready({
     // message: `Server listening on http://${host}:${port}`,
     message: `Server listening on port: ${port}`,
