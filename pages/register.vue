@@ -5,16 +5,8 @@
         <v-col cols="12" sm="8" md="6">
           <v-card class="elevation-6">
             <v-toolbar color="primary" dark flat>
-              <v-toolbar-title>Registre-se</v-toolbar-title>
+              <v-toolbar-title>Formulário de registro</v-toolbar-title>
               <v-spacer />
-              <v-tooltip top>
-                <template v-slot:activator="{ on }">
-                  <v-btn icon large to="login" v-on="on">
-                    <v-icon>mdi-login-variant</v-icon>
-                  </v-btn>
-                </template>
-                <span>Já tem conta? Entre!</span>
-              </v-tooltip>
             </v-toolbar>
             <v-card-text>
               <v-form>
@@ -173,6 +165,7 @@
                   </template>
                 </v-checkbox>
               </v-form>
+              <p>Já tem conta? <a href="/login">Entre!</a></p>
             </v-card-text>
             <v-card-actions>
               <v-spacer />

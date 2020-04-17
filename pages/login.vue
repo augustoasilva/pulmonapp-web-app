@@ -4,23 +4,21 @@
       <v-row align="center" justify="center">
         <v-col cols="12" sm="10" md="8">
           <v-card class="elevation-6">
-            <v-toolbar color="primary" dark flat>
-              <v-toolbar-title>Entrar</v-toolbar-title>
-              <v-spacer />
-              <v-tooltip top>
-                <template v-slot:activator="{ on }">
-                  <v-btn icon large to="register" v-on="on">
-                    <v-icon>mdi-account-plus</v-icon>
-                  </v-btn>
-                </template>
-                <span>Não tem uma conta? Registre-se!</span>
-              </v-tooltip>
-            </v-toolbar>
+            <v-row>
+              <v-img
+                src="/logo-invert.png"
+                aspect-ratio="1"
+                alt="Pulmonapp logo"
+                height="128"
+                contain
+              ></v-img>
+            </v-row>
+            <p class="headline font-weight-medium text-center">Pulmonapp</p>
             <v-card-text>
               <v-form>
                 <v-text-field
                   v-model="email"
-                  label="Login"
+                  label="Email"
                   name="login"
                   prepend-inner-icon="mdi-account"
                   type="text"
@@ -29,16 +27,17 @@
                 <v-text-field
                   id="password"
                   v-model="password"
-                  label="Password"
+                  label="Senha"
                   name="password"
                   prepend-inner-icon="mdi-lock"
                   type="password"
                 />
               </v-form>
+              <p>Não tem uma conta? <a href="/register">Registre-se!</a></p>
             </v-card-text>
             <v-card-actions>
-              <v-spacer />
-              <v-btn color="primary" @click="login">Entrar</v-btn>
+              <!-- <v-spacer /> -->
+              <v-btn color="primary" block @click="login">Entrar</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
