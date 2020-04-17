@@ -70,12 +70,18 @@ const userSchema = new mongoose.Schema({
   profession: {
     type: String,
     required: true,
-    enum: ['Médico(a)', 'Fisioterapeuta(a)', 'Enfermeiro(a)', 'Farmacêutico(a)']
+    enum: [
+      'Médico(a)',
+      'Fisioterapeuta(a)',
+      'Enfermeiro(a)',
+      'Farmacêutico(a)',
+      'Administrador(a)'
+    ]
   },
   council: {
     type: String,
     required: true,
-    enum: ['CRM', 'COREN', 'CREFITO', 'CRF']
+    enum: ['CRM', 'COREN', 'CREFITO', 'CRF', 'ADMIN']
   },
   registrationNumber: {
     type: Number,
