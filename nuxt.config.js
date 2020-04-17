@@ -71,8 +71,7 @@ module.exports = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    proxy: true,
-    prefix: process.env.API_URL
+    baseURL: process.env.API_URL
   },
   /*
    ** Auth module configuration
