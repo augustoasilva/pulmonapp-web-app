@@ -74,7 +74,7 @@ export default {
   layout: 'client',
   middleware: ['auth'],
   async asyncData({ $axios, params }) {
-    const { historics } = await $axios.$get(`/historics/${params.id}`)
+    const { historics } = await $axios.$get(`/api/v1/historics/${params.id}`)
     let hasHistoric
     if (historics.length > 0) {
       hasHistoric = true

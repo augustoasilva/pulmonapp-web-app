@@ -57,7 +57,7 @@ export default {
   layout: 'client',
   middleware: ['auth'],
   async asyncData({ $axios }) {
-    const { patients } = await $axios.$get('/patients')
+    const { patients } = await $axios.$get('/api/v1/patients')
     return { patients }
   },
   data() {

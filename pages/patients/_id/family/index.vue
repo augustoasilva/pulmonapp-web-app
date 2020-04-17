@@ -77,7 +77,9 @@ export default {
   layout: 'client',
   middleware: ['auth'],
   async asyncData({ $axios, params }) {
-    const { familyMembers } = await $axios.$get(`/patients/${params.id}/family`)
+    const { familyMembers } = await $axios.$get(
+      `/api/v1/patients/${params.id}/family`
+    )
     let hasFamily
     if (familyMembers.length > 0) {
       hasFamily = true

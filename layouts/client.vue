@@ -158,7 +158,7 @@ export default {
       const data = { id: this.$auth.user.id }
 
       try {
-        const response = await this.$axios.post('/auth/logout', data)
+        const response = await this.$axios.post('/api/v1/auth/logout', data)
 
         if (response.status === 200) {
           // this.$toast.success('Até logo! ' + this.$auth.user.name)

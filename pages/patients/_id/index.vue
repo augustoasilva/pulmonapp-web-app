@@ -197,7 +197,7 @@ export default {
   layout: 'client',
   middleware: ['auth'],
   async asyncData({ $axios, params }) {
-    const { patient } = await $axios.$get('/patients/' + params.id)
+    const { patient } = await $axios.$get('/api/v1/patients/' + params.id)
     const familyURI = `/patients/${params.id}/family`
     const familyAddURI = `/patients/${params.id}/family/add`
     const historicURI = `/patients/${params.id}/historics`
@@ -286,7 +286,7 @@ export default {
       }
       try {
         const response = await this.$axios.put(
-          `/patients/${this.$route.params.id}`,
+          `/api/v1/patients/${this.$route.params.id}`,
           data
         )
         if (response.status === 200) {
@@ -302,7 +302,7 @@ export default {
       const data = { assignedBy: this.$auth.user.id }
       try {
         const response = await this.$axios.put(
-          `/patients/${this.$route.params.id}/discharge`,
+          `/api/v1/patients/${this.$route.params.id}/discharge`,
           data
         )
         if (response.status === 200) {

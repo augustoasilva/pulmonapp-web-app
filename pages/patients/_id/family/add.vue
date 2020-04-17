@@ -115,7 +115,7 @@ export default {
       }
       try {
         const response = await this.$axios.put(
-          `/patients/${this.$route.params.id}/family`,
+          `/api/v1/patients/${this.$route.params.id}/family`,
           data
         )
         if (response.status === 200) {

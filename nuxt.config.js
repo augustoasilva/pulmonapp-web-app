@@ -82,7 +82,7 @@ module.exports = {
       local: {
         endpoints: {
           login: {
-            url: '/auth/login',
+            url: '/api/v1/auth/login',
             method: 'post',
             propertyName: 'token'
           },
@@ -92,7 +92,7 @@ module.exports = {
           // },
           logout: false,
           user: {
-            url: '/user/me',
+            url: '/api/v1/user/me',
             method: 'get',
             user: 'user'
           }

@@ -273,7 +273,7 @@ export default {
         assignedBy: this.$auth.user.id
       }
       try {
-        const response = await this.$axios.post('/patients', data)
+        const response = await this.$axios.post('/api/v1/patients', data)
         if (response.status === 200) {
           this.$refs.form.reset()
           this.tidalVolume = null

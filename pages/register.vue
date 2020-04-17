@@ -249,7 +249,7 @@ export default {
       }
       // eslint-disable-next-line no-console
       console.log('Register Page log: ' + data.hospital)
-      const response = await this.$axios.post('/users', data)
+      const response = await this.$axios.post('/api/v1/users', data)
       if (response.status === 200 && response.data.message.type === 'success') {
         this.error = null
         try {
