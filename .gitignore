@@ -91,3 +91,4 @@ sw.*
 
 # static/README.md
 static/README.md
+*.txt
