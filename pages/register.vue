@@ -249,9 +249,15 @@ export default {
   methods: {
     async register() {
       if (!this.accepetedTerms) {
-        return alert(
+        const toastMsg =
           'Você precisa aceitar os Termos e Condições e as Políticas de Privacidade!'
-        )
+        return this.$toast(toastMsg, {
+          color: 'error',
+          timeout: 5000,
+          icon: 'mdi-alert',
+          dismissable: true,
+          showClose: false
+        })
       }
       const data = {
         firstName: this.firstName,
