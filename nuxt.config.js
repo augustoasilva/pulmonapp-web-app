@@ -132,7 +132,8 @@ module.exports = {
           success: colors.green.accent3
         }
       }
-    }
+    },
+    treeShake: false
   },
   /*
    ** Build configuration
