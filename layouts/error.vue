@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import error400 from '~/components/errors/400.vue'
 import error401 from '~/components/errors/401.vue'
 import error403 from '~/components/errors/403.vue'
 import error404 from '~/components/errors/404.vue'
@@ -38,6 +39,9 @@ export default {
   },
   computed: {
     errorPage() {
+      if (this.error.statusCode === 400) {
+        return error400
+      }
       if (this.error.statusCode === 401) {
         return error401
       }
