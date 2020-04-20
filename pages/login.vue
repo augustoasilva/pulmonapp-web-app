@@ -64,12 +64,30 @@ export default {
             password: this.password
           }
         })
-        // this.$toast.success('Seja bem-vindo! ' + this.$auth.user.name)
         this.$router.push('/')
+        const toastMsg =
+          'Seja bem-vindo! ' +
+          this.$auth.user.firstName +
+          ' ' +
+          this.$auth.user.lastName
+        this.$toast(toastMsg, {
+          color: 'success',
+          timeout: 2000,
+          icon: 'mdi-account',
+          dismissable: true,
+          showClose: false
+        })
       } catch (error) {
-        this.$toast.error('Um erro insperado ocorreu, tente novamente.')
-        // eslint-disable-next-line no-console
-        console.log(error.response)
+        const toastMsg =
+          'Um erro insperado ocorreu, tente novamente.\nErro: ' +
+          error.response.message.text
+        return this.$toast(toastMsg, {
+          color: 'error',
+          timeout: 2000,
+          icon: 'mdi-alert-decagran',
+          dismissable: true,
+          showClose: false
+        })
       }
     }
   }

@@ -279,8 +279,19 @@ export default {
               password: data.password
             }
           })
-          // this.$toast.success('Seja bem-vindo! ' + this.$auth.user.name)
           this.$router.push('/')
+          const toastMsg =
+            'Seja bem-vindo! ' +
+            this.$auth.user.firstName +
+            ' ' +
+            this.$auth.user.lastName
+          this.$toast(toastMsg, {
+            color: 'success',
+            timeout: 2000,
+            icon: 'mdi-account',
+            dismissable: true,
+            showClose: false
+          })
         } catch (error) {
           // this.$toast.error('Um erro insperado ocorreu, tente novamente.')
           this.snackbar = true

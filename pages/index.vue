@@ -277,10 +277,26 @@ export default {
         if (response.status === 200) {
           this.$refs.form.reset()
           this.tidalVolume = null
+          const toastMsg = 'Paciente cadastrado com sucesso!'
+          this.$toast(toastMsg, {
+            color: 'success',
+            timeout: 2000,
+            icon: 'mdi-account-check',
+            dismissable: true,
+            showClose: false
+          })
         }
       } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(error)
+        const toastMsg =
+          'Um erro insperado ocorreu, tente novamente.\nErro: ' +
+          error.response.message.text
+        return this.$toast(toastMsg, {
+          color: 'error',
+          timeout: 2000,
+          icon: 'mdi-alert-decagran',
+          dismissable: true,
+          showClose: false
+        })
       }
     },
     reset() {

@@ -150,6 +150,9 @@ export default {
       overlay: false
     }
   },
+  beforeDestroy() {
+    this.$toast.clearQueue()
+  },
   methods: {
     showOverlay() {
       this.overlay = !this.overlay

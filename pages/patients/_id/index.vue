@@ -323,12 +323,26 @@ export default {
           data
         )
         if (response.status === 200) {
-          // eslint-disable-next-line no-console
-          console.log('Paciente atualizado!')
+          const toastMsg = 'Paciente atualizado com sucesso!'
+          this.$toast(toastMsg, {
+            color: 'success',
+            timeout: 2000,
+            icon: 'mdi-account-check',
+            dismissable: true,
+            showClose: false
+          })
         }
       } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(error)
+        const toastMsg =
+          'Um erro insperado ocorreu, tente novamente.\nErro: ' +
+          error.response.message.text
+        return this.$toast(toastMsg, {
+          color: 'error',
+          timeout: 2000,
+          icon: 'mdi-alert-decagran',
+          dismissable: true,
+          showClose: false
+        })
       }
     },
     async dischargePatient() {
@@ -339,13 +353,27 @@ export default {
           data
         )
         if (response.status === 200) {
-          // eslint-disable-next-line no-console
-          console.log('Paciente atualizado!')
+          const toastMsg = 'Paciente atualizado com sucesso!'
+          this.$toast(toastMsg, {
+            color: 'success',
+            timeout: 2000,
+            icon: 'mdi-account-arrow-right',
+            dismissable: true,
+            showClose: false
+          })
           this.$router.push(`/patients/${this.$route.params.id}/historics`)
         }
       } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(error)
+        const toastMsg =
+          'Um erro insperado ocorreu, tente novamente.\nErro: ' +
+          error.response.message.text
+        return this.$toast(toastMsg, {
+          color: 'error',
+          timeout: 2000,
+          icon: 'mdi-alert-decagran',
+          dismissable: true,
+          showClose: false
+        })
       }
     }
   }
