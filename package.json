@@ -30,13 +30,13 @@
     "moment": "^2.29.4",
     "mongoose": "^5.9.9",
     "morgan": "^1.10.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.12.2",
     "vuetify-toast-snackbar": "^0.6.1"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
-    "@nuxtjs/eslint-module": "^1.0.0",
-    "@nuxtjs/vuetify": "^1.0.0",
+    "@nuxtjs/eslint-module": "^1.2.0",
+    "@nuxtjs/vuetify": "^1.12.3",
     "babel-eslint": "^10.0.1",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.10.0",
