@@ -30,7 +30,7 @@
     "moment": "^2.29.4",
     "mongoose": "^5.9.9",
     "morgan": "^1.10.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "vuetify-toast-snackbar": "^0.6.1"
   },
   "devDependencies": {
